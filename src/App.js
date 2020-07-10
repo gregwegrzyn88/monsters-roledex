@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CardList } from './components/card-list/card-list.component';
 import './App.css';
 
 
@@ -7,7 +8,8 @@ class App extends Component {
     super();
 
     this.state = {
-      users: [ ]
+      users: [ ],
+      searchField: ''
     };
   }
 
@@ -17,13 +19,21 @@ class App extends Component {
     .then(users => this.setState({users: users }));
   }
 
+
+
   render() {
 
     return (
       <div className="App">
-        {
-          this.state.users.map(user => <h1 key ={user.id}> {user.name} </h1>)
-        }
+        <input 
+          type='search' 
+          placeholder='search monsters' 
+          onChange={e => 
+            this.setState({ searchField: e.target.value }
+            )
+          }
+        />
+        <CardList users={this.state.users}/>
       </div>
     );
   }
